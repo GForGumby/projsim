@@ -276,7 +276,7 @@ def run_parallel_simulations(num_simulations, draft_results_df, projection_looku
 
 if __name__ == '__main__':
     # Load the draft results
-    draft_results_df = pd.read_csv('C:/Users/12013/Desktop/draft_results_with_team_stacking_and_positions.csv')
+    draft_results_df = pd.read_csv('draft_results_with_team_stacking_and_positions (3).csv')
 
     # Create a projection lookup dictionary for quick access
     projection_lookup = {
@@ -289,7 +289,7 @@ if __name__ == '__main__':
     final_results = run_parallel_simulations(num_simulations, draft_results_df, projection_lookup)
 
     # Save the simulation results to a CSV file
-    final_results.to_csv('C:/Users/12013/Desktop/brresults.csv', index=False)
+    final_results.to_csv('brresults.csv', index=False)
 
     # Display the first few rows of the reshaped results
     print(final_results.head())
