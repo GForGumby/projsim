@@ -122,7 +122,6 @@ projections = {
     "Austin Ekeler": {'proj': 6, 'projsd': 3},
     "Dalton Schultz": {'proj': 6, 'projsd': 3}
 }
-
 # Convert projections dictionary to a NumPy structured array
 proj_dtype = np.dtype([('player_name', 'U50'), ('proj', 'f4'), ('projsd', 'f4')])
 projections_array = np.array([(name, projections[name]['proj'], projections[name]['projsd']) for name in projections], dtype=proj_dtype)
