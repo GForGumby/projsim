@@ -125,7 +125,7 @@ projections = {
 
 # Convert projections dictionary to a NumPy structured array
 proj_dtype = np.dtype([('player_name', 'U50'), ('proj', 'f4'), ('projsd', 'f4')])
-projections_array = np.array([(name, default_projections[name]['proj'], default_projections[name]['projsd']) for name in default_projections], dtype=proj_dtype)
+projections_array = np.array([(name, projections[name]['proj'], projections[name]['projsd']) for name in projections], dtype=proj_dtype)
 
 # JIT compiled function to generate projection
 @jit(nopython=True)
