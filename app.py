@@ -154,8 +154,8 @@ else:
             for name in default_projections
         }
 
-    # Number of simulations for projection
-    num_simulations = st.number_input("Number of simulations", min_value=1, value=1000)
+# Number of simulations for projection
+num_simulations = st.number_input("Number of simulations", min_value=1, value=1000)
 
     if st.button("Run Projection Simulation"):
         # Run simulations
