@@ -16,25 +16,26 @@ if uploaded_draft_file is not None:
     st.write("Draft Results Data Preview:")
     st.dataframe(draft_results_df.head())
 
-    # Check if custom projections file is uploaded
+    # Define default projections
+    default_projections = {
+        "Christian McCaffrey": {'proj': 30, 'projsd': 9},
+        "CeeDee Lamb": {'proj': 29, 'projsd': 9},
+        # Additional default player projections here...
+    }
+
     if uploaded_projections_file is not None:
         custom_projections_df = pd.read_csv(uploaded_projections_file)
         st.write("Custom Projections Data Preview:")
         st.dataframe(custom_projections_df.head())
 
         # Create a projection lookup dictionary from the custom projections
-        projection_lookup = {
-            row['player_name']: (row['proj'], row['projsd'])
-            for _, row in custom_projections_df.iterrows()
-        }
+        projection_lookup = {}
+        for _, row in custom_projections_df.iterrows():
+            player_name = row['player_name']
+            proj = row['proj']
+            projsd = row.get('projsd', default_projections.get(player_name, {}).get('projsd', 6))  # Default projsd = 6 if not specified
+            projection_lookup[player_name] = (proj, projsd)
     else:
-        # Define default projections
-        default_projections = {
-            "Christian McCaffrey": {'proj': 30, 'projsd': 9},
-            "CeeDee Lamb": {'proj': 29, 'projsd': 9},
-            # Additional default player projections here...
-        }
-
         # Create a projection lookup dictionary from the default projections
         projection_lookup = {
             name: (default_projections[name]['proj'], default_projections[name]['projsd'])
