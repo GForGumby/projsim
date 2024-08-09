@@ -147,7 +147,7 @@ if uploaded_projections_file is not None:
             proj = row['proj']
             projsd = row.get('projsd', default_projections.get(player_name, {}).get('projsd', 6))  # Default projsd = 6 if not specified
             projection_lookup[player_name] = (proj, projsd)
-    else:
+else:
         # Create a projection lookup dictionary from the default projections
         projection_lookup = {
             name: (default_projections[name]['proj'], default_projections[name]['projsd'])
