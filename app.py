@@ -136,7 +136,7 @@ projections = {
     "Dalton Schultz": {'proj': 6, 'projsd': 3}
 }
 
-    if uploaded_projections_file is not None:
+if uploaded_projections_file is not None:
         custom_projections_df = pd.read_csv(uploaded_projections_file)
         st.write("Custom Projections Data Preview:")
         st.dataframe(custom_projections_df.head())
