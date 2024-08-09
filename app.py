@@ -16,10 +16,10 @@ if uploaded_draft_file is not None:
     st.write("Draft Results Data Preview:")
     st.dataframe(draft_results_df.head())
 
-# Define player projections and standard deviations
-projections = {
-    "Christian McCaffrey": {'proj': 30, 'projsd': 9},
-    "CeeDee Lamb": {'proj': 29, 'projsd': 150},
+    # Define default projections
+    default_projections = {
+  "Christian McCaffrey": {'proj': 30, 'projsd': 9},
+    "CeeDee Lamb": {'proj': 29, 'projsd': 9},
     "Tyreek Hill": {'proj': 28, 'projsd': 9},
     "Ja'Marr Chase": {'proj': 27, 'projsd': 9},
     "Justin Jefferson": {'proj': 26, 'projsd': 9},
@@ -135,7 +135,8 @@ projections = {
     "Austin Ekeler": {'proj': 6, 'projsd': 3},
     "Dalton Schultz": {'proj': 6, 'projsd': 3}
 }
-if uploaded_projections_file is not None:
+
+    if uploaded_projections_file is not None:
         custom_projections_df = pd.read_csv(uploaded_projections_file)
         st.write("Custom Projections Data Preview:")
         st.dataframe(custom_projections_df.head())
@@ -147,17 +148,17 @@ if uploaded_projections_file is not None:
             proj = row['proj']
             projsd = row.get('projsd', default_projections.get(player_name, {}).get('projsd', 6))  # Default projsd = 6 if not specified
             projection_lookup[player_name] = (proj, projsd)
-else:
+    else:
         # Create a projection lookup dictionary from the default projections
         projection_lookup = {
             name: (default_projections[name]['proj'], default_projections[name]['projsd'])
             for name in default_projections
         }
 
-# Number of simulations for projection
-num_simulations = st.number_input("Number of simulations", min_value=1, value=1000)
+    # Number of simulations for projection
+    num_simulations = st.number_input("Number of simulations", min_value=1, value=1000)
 
-if st.button("Run Projection Simulation"):
+    if st.button("Run Projection Simulation"):
         # Run simulations
         final_results = run_parallel_simulations(num_simulations, draft_results_df, projection_lookup)
 
